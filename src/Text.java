@@ -52,7 +52,9 @@ public class Text {
 
         }
 
-        subKeyLeft28Bits[0]=fiftySixBitPermutedKey.substring(0,28);
+
+
+        subKeyLeft28Bits[0]=fiftySixBitPermutedKey.substring(0,28); /////////////////şlksdfjhlkdsahfgljşkasdghflşkudsajhgşljsadhgfşjdksahglkdsahfkasdş
         subKeyRight28Bits[0]=fiftySixBitPermutedKey.substring(28,56);
 
 
@@ -61,8 +63,8 @@ public class Text {
         for (int i=0; i<16 ; i++){
 
 
-            subKeyLeft28Bits[i+1]=cyclicLeftShift(subKeyLeft28Bits[i],p.shiftingOperation[i]-1);
-            subKeyRight28Bits[i+1]=cyclicLeftShift(subKeyRight28Bits[i],p.shiftingOperation[i]-1);
+            subKeyLeft28Bits[i+1]=cyclicLeftShift(subKeyLeft28Bits[i],p.shiftingOperation[i]);
+            subKeyRight28Bits[i+1]=cyclicLeftShift(subKeyRight28Bits[i],p.shiftingOperation[i]);
 
             subKeysFiftySixBits[i]=subKeyLeft28Bits[i+1]+subKeyRight28Bits[i+1];
 
@@ -83,13 +85,13 @@ public class Text {
 
         }
 
-        for (int i = 0; i < 16; i++) {
+
+       /* for (int i = 0; i < 16; i++) {
 
             System.out.println(i+".subKey \t"+subKeysFourtyEightBitsPermutated[i]);
 
         }
-
-
+*/
 
     }
 
@@ -134,13 +136,21 @@ public class Text {
 
                 eightBitConversion = String.format("%08d", Integer.parseInt(Integer.toBinaryString(karakterler[i][j])));
 
-
-
                 bits[i][j]=eightBitConversion;
 
             }
 
+
+
+
         }
+
+
+        /*for (int i = 0; i <8 ; i++) {
+
+            System.out.print(bits[0][i]);
+
+        }*/
 
     }
 

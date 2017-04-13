@@ -5,10 +5,7 @@ public class main {
 
     public static void main (String [] args) {
 
-        Text t = new Text();
-
-        t.getSubKeys();
-
+        RoundIslemi t = new RoundIslemi();
 
 
     }
