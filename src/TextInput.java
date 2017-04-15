@@ -5,7 +5,7 @@ import java.io.IOException;
 /**
  * Created by Enes on 8.04.2017.
  */
-public class TextInput {
+public class  TextInput {
 
 
 

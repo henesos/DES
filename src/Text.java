@@ -18,6 +18,57 @@ public class Text {
         getSubKeys();
     }
 
+    /**********************************************************************************
+     **************  Text Girdisini ASCII karakterlerden Bite Çevirme  ****************
+     ************************************************************** ******************/
+
+    public void textToBinary(){
+
+        textInput = new TextInput();
+        String plainText = null;
+        try {
+            plainText = textInput.textOku(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        char [][] karakterler = new char [plainText.length()/8][8];
+
+        String [] splittedStrings = new String[plainText.length()/8];
+
+        String eightBitConversion;
+
+        int x=0;
+        int y=8;
+
+        for (int i = 0; i < plainText.length()/8 ; i++) {
+
+            splittedStrings[i]=plainText.substring(x,y);
+
+            x+=8;
+            y+=8;
+
+        }
+
+        int s = 0;
+        for (int i = 0; i < plainText.length() / 8; i++) {
+
+            for (int j = 0; j < 8; j++) {
+
+                karakterler[i][j] = splittedStrings[i].charAt(j);
+
+                eightBitConversion = String.format("%08d", Integer.parseInt(Integer.toBinaryString(karakterler[i][j])));
+
+                bits[i][j]=eightBitConversion;
+
+            }
+        }
+    }
+
+    /**********************************************************************************
+     *******************  16 Adet Farklı Subkeylerin Elde Edilmesi  *******************
+     ************************************************************** ******************/
+
     public void getSubKeys(){
 
         textInput=new TextInput();
@@ -52,16 +103,10 @@ public class Text {
 
         }
 
-
-
-        subKeyLeft28Bits[0]=fiftySixBitPermutedKey.substring(0,28); /////////////////şlksdfjhlkdsahfgljşkasdghflşkudsajhgşljsadhgfşjdksahglkdsahfkasdş
+        subKeyLeft28Bits[0]=fiftySixBitPermutedKey.substring(0,28);
         subKeyRight28Bits[0]=fiftySixBitPermutedKey.substring(28,56);
 
-
-
-
         for (int i=0; i<16 ; i++){
-
 
             subKeyLeft28Bits[i+1]=cyclicLeftShift(subKeyLeft28Bits[i],p.shiftingOperation[i]);
             subKeyRight28Bits[i+1]=cyclicLeftShift(subKeyRight28Bits[i],p.shiftingOperation[i]);
@@ -86,73 +131,9 @@ public class Text {
         }
 
 
-       /* for (int i = 0; i < 16; i++) {
-
-            System.out.println(i+".subKey \t"+subKeysFourtyEightBitsPermutated[i]);
-
-        }
-*/
-
     }
 
-    public void textToBinary(){
 
-        textInput = new TextInput();
-        String plainText = null;
-        try {
-            plainText = textInput.textOku(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        char [][] karakterler = new char [plainText.length()/8][8];
-
-        String [] splittedStrings = new String[plainText.length()/8];
-
-
-
-        String eightBitConversion;
-
-        int x=0;
-        int y=8;
-
-        for (int i = 0; i < plainText.length()/8 ; i++) {
-
-            splittedStrings[i]=plainText.substring(x,y);
-
-            x+=8;
-            y+=8;
-
-        }
-
-        int s = 0;
-            for (int i = 0; i < plainText.length() / 8; i++) {
-
-
-
-            for (int j = 0; j < 8; j++) {
-
-                karakterler[i][j] = splittedStrings[i].charAt(j);
-
-                eightBitConversion = String.format("%08d", Integer.parseInt(Integer.toBinaryString(karakterler[i][j])));
-
-                bits[i][j]=eightBitConversion;
-
-            }
-
-
-
-
-        }
-
-
-        /*for (int i = 0; i <8 ; i++) {
-
-            System.out.print(bits[0][i]);
-
-        }*/
-
-    }
 
 
     public static String cyclicLeftShift(String s, int k){

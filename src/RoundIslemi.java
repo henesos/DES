@@ -5,39 +5,36 @@ import javax.swing.plaf.synth.SynthEditorPaneUI;
  */
 public class RoundIslemi {
 
-    int x = 0;
-    String bitsToBeTransformedInStringStatus ="";
 
-    public String wordKey;
+    private String permutedFinal64Bits="";
+    private String plainTextBinary="";
     public permutaitiontables ptable = new permutaitiontables();
     Text textHandler = new Text();
-
 
     public RoundIslemi(){
 
         getStringBits();
+        decryption();
 
     }
 
-
     public void getStringBits(){
-
 
         String [] leftBits= new String[17];
         String [] rightBits= new String[17];
 
+        String bitsToBeTransformedInStringStatus ="";
         String finalLeftRightbirlesik="";
         String initialPermutaition64bits="";
-        String permutedFinal64Bits="";
 
-        if (x==0){
+
         for (int i = 0; i <8 ; i++) {
 
             bitsToBeTransformedInStringStatus += textHandler.bits[0][i];
 
         }
-        }
-        System.out.println(bitsToBeTransformedInStringStatus);
+
+        System.out.println("maintexttobin--"+bitsToBeTransformedInStringStatus);
 
         for (int i = 0; i <64 ; i++) {
 
@@ -49,8 +46,6 @@ public class RoundIslemi {
 
         leftBits[0] = initialPermutaition64bits.substring(0, 32);
         rightBits[0] = initialPermutaition64bits.substring(32, 64);
-
-
 
         for (int rounds = 0; rounds <16 ; rounds++) {
 
@@ -69,16 +64,16 @@ public class RoundIslemi {
 
                 }else {
 
-                    System.out.println("left"+rounds+"---------"+leftBits[rounds]);
-                    System.out.println("right"+rounds+"--------"+rightBits[rounds]);
+                    System.out.println("left"+rounds+"------------"+leftBits[rounds]);
+                    System.out.println("right"+rounds+"-----------"+rightBits[rounds]);
 
                     rightBits[rounds+1]=rightLeftXoring(function(rightBits[rounds], rounds), leftBits[rounds]);
                     leftBits[rounds+1]=rightBits[rounds];
 
                     System.out.println("*************************************"+"Round-"+rounds+"************************************");
 
-                    System.out.println("left"+(rounds+1)+"---------"+leftBits[rounds+1]);
-                    System.out.println("right"+(rounds+1)+"--------"+rightBits[rounds+1]);
+                    System.out.println("left"+(rounds+1)+"------------"+leftBits[rounds+1]);
+                    System.out.println("right"+(rounds+1)+"-----------"+rightBits[rounds+1]);
 
                 }
 
@@ -86,7 +81,7 @@ public class RoundIslemi {
 
         finalLeftRightbirlesik =leftBits[16]+rightBits[16];
 
-        System.out.println("finalunpermunat"+finalLeftRightbirlesik);
+        System.out.println("finalunpermun-"+finalLeftRightbirlesik);
 
         for (int i = 0; i <64 ; i++) {
 
@@ -94,20 +89,69 @@ public class RoundIslemi {
 
         }
 
-        if (x==0) {
-            System.out.println("chipertext------" + permutedFinal64Bits);
+          System.out.println("ciphertext----"+permutedFinal64Bits);
 
-        }else
-            System.out.print("plaintext----"+permutedFinal64Bits);
 
-        x++;
-        if (x==1) {
-            bitsToBeTransformedInStringStatus="";
-            bitsToBeTransformedInStringStatus = permutedFinal64Bits;
+    }
 
-            getStringBits();
+    public void decryption(){
+
+        String [] leftBits= new String[17];
+        String [] rightBits= new String[17];
+        String finalLeftRightbirlesik="";
+        String initialPermutaition64bits="";
+
+
+        for (int i = 0; i <64 ; i++) {
+
+            initialPermutaition64bits +=permutedFinal64Bits.charAt(ptable.initialPermutation[i]-1);
 
         }
+
+        System.out.println("initial64------"+initialPermutaition64bits);
+
+        leftBits[16] = initialPermutaition64bits.substring(0, 32);
+        rightBits[16] = initialPermutaition64bits.substring(32, 64);
+
+        for (int rounds = 15; rounds >=0 ; rounds--) {
+
+            if (rounds==15){
+
+                System.out.println("right"+rounds+"---------"+rightBits[rounds+1]);
+
+                System.out.println("left"+rounds+"--------"+leftBits[rounds+1]);
+
+                leftBits[rounds]=rightLeftXoring(function(leftBits[rounds+1],rounds),rightBits[rounds+1]);
+                rightBits[rounds]=leftBits[rounds+1];
+
+            }else {
+
+                System.out.println("right"+rounds+"---------"+rightBits[rounds+1]);
+                System.out.println("left"+rounds+"--------"+leftBits[rounds+1]);
+
+                leftBits[rounds]=rightLeftXoring(function(leftBits[rounds+1], rounds), rightBits[rounds+1]);
+                rightBits[rounds]=leftBits[rounds+1];
+
+                System.out.println("*************************************"+"Round-"+rounds+"************************************");
+
+                System.out.println("left"+(rounds)+"---------"+rightBits[rounds+1]);
+                System.out.println("right"+(rounds)+"--------"+leftBits[rounds+1]);
+
+            }
+
+        }
+
+        finalLeftRightbirlesik =leftBits[0]+rightBits[0];
+
+        System.out.println("finalunpermunat"+finalLeftRightbirlesik);
+
+        for (int i = 0; i <64 ; i++) {
+
+            plainTextBinary += finalLeftRightbirlesik.charAt(ptable.finalInitialPermutation[i]-1);
+
+        }
+
+        System.out.print("ciphertext----"+plainTextBinary);
 
     }
 
@@ -117,9 +161,7 @@ public class RoundIslemi {
         String xORlanmis="";
         String fonksiyonCikisBit="";
 
-
-
-            System.out.println("32bit----------"+rightBits+"\t");
+        System.out.println("32bit----------"+rightBits+"\t");
 
         data48Bits = Expansion(rightBits);
 
