@@ -29,11 +29,36 @@ public class RoundIslemi {
         String initialPermutaition64bits="";
 
 
+        System.out.print(
+                "*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+                        "\n*******************************************************" +"ENCRPTYION"+
+
+                        "\n");
+
+
         for (int i = 0; i <8 ; i++) {
 
             bitsToBeTransformedInStringStatus += textHandler.bits[0][i];
 
         }
+
+
 
         System.out.println("maintexttobin--"+bitsToBeTransformedInStringStatus);
 
@@ -90,7 +115,7 @@ public class RoundIslemi {
 
         }
 
-          System.out.println("ciphertext----"+permutedFinal64Bits);
+          System.out.println("ciphertext----"+permutedFinal64Bits+"\n\n\n\n");
 
 
     }
@@ -106,6 +131,28 @@ public class RoundIslemi {
         String finalLeftRightbirlesik="";
         String initialPermutaition64bits="";
 
+
+        System.out.print(
+                "*******************************************************" +"DECRPYTION"+
+                "\n*******************************************************" +"DECRPYTION"+
+                "\n*******************************************************" +"DECRPYTION"+
+                "\n*******************************************************" +"DECRPYTION"+
+                "\n*******************************************************" +"DECRPYTION"+
+                "\n*******************************************************" +"DECRPYTION"+
+                "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+                        "\n*******************************************************" +"DECRPYTION"+
+
+                "\n");
 
         for (int i = 0; i <64 ; i++) {
 
@@ -134,6 +181,7 @@ public class RoundIslemi {
                 System.out.println("right"+rounds+"---------"+rightBits[rounds+1]);
                 System.out.println("left"+rounds+"--------"+leftBits[rounds+1]);
 
+
                 leftBits[rounds]=rightLeftXoring(function(leftBits[rounds+1], rounds), rightBits[rounds+1]);
                 rightBits[rounds]=leftBits[rounds+1];
 
@@ -156,7 +204,8 @@ public class RoundIslemi {
 
         }
 
-        System.out.print("plaintText-----"+plainTextBinary);
+        System.out.println("ChiperText-----"+permutedFinal64Bits);
+        System.out.println("plaintText-----"+plainTextBinary);
 
     }
 
@@ -282,7 +331,7 @@ public class RoundIslemi {
         }
 
 
-        System.out.println("sboxlayalama---"+sIslemineGirmisBitler);
+        System.out.println("inTheSBOX------"+sIslemineGirmisBitler);
 
         for (int i = 0; i <32 ; i++) {
 
