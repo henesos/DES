@@ -1,10 +1,7 @@
-import javax.swing.plaf.synth.SynthEditorPaneUI;
-
 /**
  * Created by Enes on 10.04.2017.
  */
 public class RoundIslemi {
-
 
     private String permutedFinal64Bits="";
     private String plainTextBinary="";
@@ -13,12 +10,16 @@ public class RoundIslemi {
 
     public RoundIslemi(){
 
-        getStringBits();
-        decryption();
+        Encrpty();
+        Decryption();
 
     }
 
-    public void getStringBits(){
+    /**********************************************************************************
+     **************  Enkript i?lemini burada uygular?z  *******************************
+     ************************************************************** ******************/
+
+    public void Encrpty(){
 
         String [] leftBits= new String[17];
         String [] rightBits= new String[17];
@@ -81,7 +82,7 @@ public class RoundIslemi {
 
         finalLeftRightbirlesik =leftBits[16]+rightBits[16];
 
-        System.out.println("finalunpermun-"+finalLeftRightbirlesik);
+        System.out.println("finalunpermuna-"+finalLeftRightbirlesik);
 
         for (int i = 0; i <64 ; i++) {
 
@@ -94,7 +95,11 @@ public class RoundIslemi {
 
     }
 
-    public void decryption(){
+    /**********************************************************************************
+     ********************  Dekript i?lemini burada uygular?z  *************************
+     ************************************************************** ******************/
+
+    public void Decryption(){
 
         String [] leftBits= new String[17];
         String [] rightBits= new String[17];
@@ -134,8 +139,8 @@ public class RoundIslemi {
 
                 System.out.println("*************************************"+"Round-"+rounds+"************************************");
 
-                System.out.println("left"+(rounds)+"---------"+rightBits[rounds+1]);
-                System.out.println("right"+(rounds)+"--------"+leftBits[rounds+1]);
+                System.out.println("right"+(rounds)+"---------"+rightBits[rounds]);
+                System.out.println("left"+(rounds)+"----------"+leftBits[rounds]);
 
             }
 
@@ -143,7 +148,7 @@ public class RoundIslemi {
 
         finalLeftRightbirlesik =leftBits[0]+rightBits[0];
 
-        System.out.println("finalunpermunat"+finalLeftRightbirlesik);
+        System.out.println("finalunpermuna-"+finalLeftRightbirlesik);
 
         for (int i = 0; i <64 ; i++) {
 
@@ -151,9 +156,14 @@ public class RoundIslemi {
 
         }
 
-        System.out.print("ciphertext----"+plainTextBinary);
+        System.out.print("plaintText-----"+plainTextBinary);
 
     }
+
+
+    /**********************************************************************************
+     *****************  Fonksiyon i?lemi t?m i? Fonksiyonlar?yla ****  ****************
+     ************************************************************** ******************/
 
     public String function(String rightBits, int round){
 
@@ -182,7 +192,9 @@ public class RoundIslemi {
 
 
     }
-
+    /**********************************************************************************
+     **************  32-Bitlik Veriyi 48 Bite GEni?letme i?lemi  **********************
+     ************************************************************** ******************/
     public String Expansion(String rightBits){
 
         String right32Bits="";
@@ -196,6 +208,9 @@ public class RoundIslemi {
         return right32Bits;
     }
 
+    /**********************************************************************************
+     **************  Roundun Keyi ile Roundun Sag bitini XORlama  *********************
+     ************************************************************** ******************/
     public String xOR(String right48Bits,int round){
 
         String xORlanmisBitler="";
@@ -232,6 +247,9 @@ public class RoundIslemi {
     }
 
 
+    /**********************************************************************************
+     *****  SBox ??lemi ile B?rlikte 48 bitlik veriden 32 Bitlik veri elde edimi  *****
+     ************************************************************** ******************/
     public String SBox(String right48Bits , int round){
 
         String sIslemineGirmisBitler="";
@@ -276,6 +294,11 @@ public class RoundIslemi {
 
     }
 
+
+
+    /**********************************************************************************
+     **************  Round Sonu ??lemi Sa? ve Sol Bitleri Xorlanmas?  *****************
+     ************************************************************** ******************/
     public String rightLeftXoring(String rightBits, String leftBits){
 
         String sag32bitxorlanmis="";
