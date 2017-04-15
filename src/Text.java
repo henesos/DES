@@ -5,7 +5,7 @@ import java.io.IOException;
  */
 public class Text {
 
-    private String path = "merhaba.txt";
+    private String path = "plainText.txt";
     private String pathKey="key.txt";
     public static TextInput textInput;
     public String [][] bits = new String [8][8];
